@@ -1,0 +1,886 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../static/css/style.css">
+    <title>Random Forest</title>
+  </head>
+  <body>
+    <div class="container">
+      <!-- Navigačné menu -->
+      <div class="nav-container">
+        <div class="logo" data-page="home">
+          <!-- SVG logo -->
+          <svg version="1.0" xmlns="http://www.w3.org/2000/svg"
+            width="64.000000pt" height="64.000000pt"
+            viewBox="0 0 64.000000 64.000000"
+            preserveAspectRatio="xMidYMid meet">
+            <g
+              transform="translate(0.000000,64.000000) scale(0.100000,-0.100000)"
+              fill="white" stroke="none">
+              <!-- Cesta SVG -->
+              <path
+                d="M351 490 c-41 -64 -48 -82 -36 -86 13 -5 12 -13 -9 -51 -21 -37 -23
+            -45 -10 -50 12 -4 9 -15 -15 -58 -32 -56 -31 -65 6 -65 19 0 23 -5 23 -30 0
+            -28 -2 -30 -40 -30 l-40 0 0 69 c0 62 2 69 23 77 15 5 -3 9 -62 13 -65 5 -86
+            10 -95 23 -19 30 4 53 58 56 48 3 66 22 20 22 -21 0 -25 4 -22 23 2 18 10 23
+            46 25 23 2 42 7 42 13 0 5 -4 9 -10 9 -5 0 -10 9 -10 20 0 17 7 20 49 20 28 0
+            53 5 56 10 4 6 -13 10 -44 10 -52 0 -87 -21 -77 -46 3 -9 -2 -14 -14 -14 -25
+            0 -63 -37 -56 -55 3 -8 -6 -17 -23 -23 -18 -6 -31 -20 -35 -36 -7 -30 8 -66
+            29 -66 8 0 20 -10 26 -22 15 -29 28 -38 57 -38 19 0 22 -5 22 -45 l0 -45 -65
+            0 c-37 0 -65 -4 -65 -10 0 -6 87 -10 240 -10 153 0 240 4 240 10 0 6 -22 10
+            -50 10 -49 0 -50 1 -50 30 0 29 1 30 48 30 27 0 51 3 55 6 3 3 -7 30 -24 59
+            -24 43 -27 54 -15 58 13 5 11 13 -10 50 -21 38 -22 46 -9 51 12 4 5 22 -36 86
+            -28 44 -55 80 -59 80 -4 0 -31 -36 -59 -80z m99 3 c19 -32 37 -61 38 -65 2 -5
+            -33 -8 -78 -8 -45 0 -80 3 -78 8 9 22 73 122 78 122 3 0 21 -26 40 -57z m39
+            -127 c12 -18 21 -36 21 -40 0 -3 -45 -6 -100 -6 -55 0 -100 3 -100 6 0 4 9 22
+            21 40 20 32 24 34 79 34 55 0 59 -2 79 -34z m28 -111 c12 -22 23 -43 23 -47 0
+            -5 -58 -8 -130 -8 -72 0 -130 2 -130 5 0 9 31 68 43 83 7 9 34 12 91 10 l80
+            -3 23 -40z m-307 -10 c0 -10 -10 -15 -30 -15 -20 0 -30 5 -30 15 0 10 10 15
+            30 15 20 0 30 -5 30 -15z m150 -95 c0 -20 -5 -30 -15 -30 -10 0 -15 10 -15 30
+            0 20 5 30 15 30 10 0 15 -10 15 -30z m80 0 c0 -27 -3 -30 -30 -30 -27 0 -30 3
+            -30 30 0 27 3 30 30 30 27 0 30 -3 30 -30z" />
+              <path
+                d="M170 70 c0 -6 57 -10 150 -10 93 0 150 4 150 10 0 6 -57 10 -150 10
+            -93 0 -150 -4 -150 -10z" />
+            </g>
+          </svg>
+        </div>
+        <div class="nav-menu">
+          <!-- Odkazy na jednotlivé stránky -->
+          <a href="#home" class="nav-link active" data-page="home">Home</a>
+          <a href="#about" class="nav-link" data-page="about">About</a>
+          <a href="#tutorial" class="nav-link" data-page="tutorial">Tutorial</a>
+          <a href="#info" class="nav-link" data-page="info">Info</a>
+          <a href="#contact" class="nav-link" data-page="contact">Contact</a>
+        </div>
+      </div>
+
+      <!-- Domovská stránka -->
+      <div id="home-page" class="page-container active">
+        <h1 class="animated-title">Random Forest App</h1>
+        <p class="typewriter">Welcome to the Random Forest prediction
+          service!</p>
+        <p class="typewriter">Upload your dataset, configure hyperparameters,
+          and get prediction results.</p>
+
+        <!-- Sekcia "Začať" -->
+        <div class="get-started-container">
+          <h2 class="get-started-title">Get Started</h2>
+          <div class="get-started-steps">
+            <div class="step-card">
+              <div class="step-number">1</div>
+              <p>Upload your CSV dataset</p>
+            </div>
+            <div class="step-card">
+              <div class="step-number">2</div>
+              <p>Configure model parameters</p>
+            </div>
+            <div class="step-card">
+              <div class="step-number">3</div>
+              <p>Run analysis and view results</p>
+            </div>
+          </div>
+          <a href="#form-section" class="styled-button">Start Now</a>
+        </div>
+
+        <!-- SVG ilustrácia pre Random Forest -->
+        <div class="svg-container">
+          <svg width="800" height="300" viewBox="0 0 800 300" fill="none"
+            xmlns="http://www.w3.org/2000/svg">
+            <!-- SVG prvky pre vizualizáciu -->
+            <circle cx="400" cy="50" r="20" fill="#b9ffff" stroke="#ffa3c8"
+              stroke-width="3" />
+            <line x1="400" y1="70" x2="250" y2="150" stroke="#ffa3c8"
+              stroke-width="3" />
+            <circle cx="250" cy="150" r="15" fill="#b9ffff" stroke="#ffa3c8"
+              stroke-width="3" />
+            <line x1="250" y1="165" x2="150" y2="250" stroke="#ffa3c8"
+              stroke-width="3" />
+            <circle cx="150" cy="250" r="12" fill="#b9ffff" stroke="#ffa3c8"
+              stroke-width="3" />
+            <line x1="250" y1="165" x2="350" y2="250" stroke="#ffa3c8"
+              stroke-width="3" />
+            <circle cx="350" cy="250" r="12" fill="#b9ffff" stroke="#ffa3c8"
+              stroke-width="3" />
+            <line x1="400" y1="70" x2="550" y2="150" stroke="#ffa3c8"
+              stroke-width="3" />
+            <circle cx="550" cy="150" r="15" fill="#b9ffff" stroke="#ffa3c8"
+              stroke-width="3" />
+            <line x1="550" y1="165" x2="450" y2="250" stroke="#ffa3c8"
+              stroke-width="3" />
+            <circle cx="450" cy="250" r="12" fill="#b9ffff" stroke="#ffa3c8"
+              stroke-width="3" />
+            <line x1="550" y1="165" x2="650" y2="250" stroke="#ffa3c8"
+              stroke-width="3" />
+            <circle cx="650" cy="250" r="12" fill="#b9ffff" stroke="#ffa3c8"
+              stroke-width="3" />
+          </svg>
+        </div>
+
+        <!-- FORMULÁR -->
+        <form action="/predict" method="post" enctype="multipart/form-data"
+          id="form-section">
+          <div class="input-group-file">
+            <label for="file" class="custom-file-label">📂 Select CSV
+              file</label>
+            <input type="file" id="file" name="file" accept=".csv">
+            <span class="file-name">No file selected</span>
+          </div>
+
+          <!-- Výber úlohy -->
+          <div class="input-group-task">
+            <label>Task type:</label>
+            <input type="radio" id="classification" name="task"
+              value="classification" checked>
+            <label for="classification">Classification</label>
+            <input type="radio" id="regression" name="task" value="regression">
+            <label for="regression">Regression</label>
+          </div>
+
+          <!-- Nastavenie hyperparametrov -->
+          <div class="hyperparams">
+            <h3>⚙️ Hyperparameter Settings</h3>
+            <div class="input-group">
+              <label for="n_trees">Number of trees (n_trees):</label>
+              <input type="number" name="n_trees" id="n_trees" value="10"
+                min="1">
+            </div>
+
+            <div class="input-group">
+              <label for="max_depth">Maximum depth (max_depth):</label>
+              <input type="number" name="max_depth" id="max_depth"
+                placeholder="None">
+            </div>
+
+            <div class="input-group">
+              <label for="min_samples_split">Min. samples split
+                (min_samples_split):</label>
+              <input type="number" name="min_samples_split"
+                id="min_samples_split" value="2" min="2">
+            </div>
+
+            <div class="input-group">
+              <label for="loss">Loss function:</label>
+              <select name="loss" id="loss">
+                <!-- Možnosti budú pridané dynamicky -->
+              </select>
+              <span id="loss-help" class="help-icon"
+                style="cursor: help;">[?]</span>
+            </div>
+
+            <!-- Počet riadkov -->
+            <div class="input-group">
+              <label for="display_rows">Number of prediction rows:</label>
+              <input type="number" name="display_rows" id="display_rows"
+                value="10" min="1">
+            </div>
+
+            <div class="input-group">
+              <label for="head_rows">Number of dataset head rows:</label>
+              <input type="number" name="head_rows" id="head_rows" value="5"
+                min="1">
+            </div>
+
+            <input type="checkbox" id="balance_class_weights"
+              name="balance_class_weights">
+            <label for="balance_class_weights">Class balancing (for
+              classification only)</label>
+          </div>
+
+          <!-- Ďalšie nastavenia -->
+          <div class="extras">
+            <h3>🔍 Additional Settings</h3>
+            <input type="checkbox" id="analyze_metrics" name="analyze_metrics">
+            <label for="analyze_metrics">Analyze metrics</label>
+
+            <input type="checkbox" id="visualize" name="visualize">
+            <label for="visualize">Show visualizations</label>
+
+            <input type="checkbox" id="show_summary" name="show_summary">
+            <label for="show_summary">Display summary statistics</label>
+          </div>
+
+          <button type="submit">🚀 Run Analysis</button>
+        </form>
+      </div>
+
+      <!-- O stránke -->
+      <div id="about-page" class="page-container">
+        <h1>About Random Forest 🌳📊</h1>
+
+        <h2>Introduction and Overview</h2>
+        <p>
+          Random Forest is an ensemble learning method that builds multiple
+          decision trees and merges their predictions to produce a more accurate
+          and stable prediction. By leveraging the power of multiple decision
+          trees trained on random subsets of data (bootstrapping) and subsets of
+          features, Random Forest effectively reduces overfitting and improves
+          the overall predictive performance.
+        </p>
+
+        <h2>Historical Background 📜</h2>
+        <p>
+          Random Forest was first introduced by Leo Breiman in 2001, building on
+          earlier concepts of ensemble methods, decision trees, and bootstrap
+          aggregation (bagging). Leo Breiman’s influential paper, <a
+            href="https://www.stat.berkeley.edu/~breiman/randomforest2001.pdf"
+            target="_blank">"Random Forests"</a>, provided both the theoretical
+          foundation and practical applications for this method. Since then,
+          Random Forests have become one of the most widely used machine
+          learning algorithms due to their simplicity, effectiveness, and
+          versatility.
+        </p>
+
+        <h2>Algorithm Details ⚙️</h2>
+        <p>
+          Random Forest operates by training a multitude of decision trees
+          independently:
+        </p>
+        <ul>
+          <li><strong>Bootstrapping:</strong> Each tree is built from a
+            bootstrap sample—a randomly selected subset of the training dataset
+            (with replacement). This encourages diversity among trees.</li>
+          <li><strong>Random Feature Selection:</strong> At each node split
+            within a tree, a random subset of features is considered. This
+            further enhances diversity and mitigates correlation between
+            individual trees.</li>
+          <li><strong>Aggregation:</strong> Final predictions are aggregated
+            through majority voting (classification) or averaging (regression),
+            greatly improving prediction stability.</li>
+        </ul>
+
+        <h2>Advantages of Random Forest 🌟</h2>
+        <p>
+          Random Forest offers several important benefits, including:
+        </p>
+        <ul>
+          <li>Reduces overfitting compared to single decision trees.</li>
+          <li>Handles both classification and regression tasks effectively.</li>
+          <li>Performs well on high-dimensional datasets and large volumes of
+            data.</li>
+          <li>Provides built-in estimation of feature importance.</li>
+          <li>Handles missing data and maintains accuracy even with noisy or
+            incomplete datasets.</li>
+        </ul>
+
+        <h2>Limitations and Considerations ⚠️</h2>
+        <p>
+          Although highly effective, Random Forest has some limitations:
+        </p>
+        <ul>
+          <li>Less interpretable than individual decision trees due to ensemble
+            complexity.</li>
+          <li>Computationally intensive with extremely large datasets or a high
+            number of trees.</li>
+          <li>May not perform optimally with very sparse data or when there is a
+            dominance of irrelevant features.</li>
+        </ul>
+
+        <h2>Real-world Applications 🌎</h2>
+        <p>
+          Random Forest algorithms are used in various domains such as:
+        </p>
+        <ul>
+          <li><strong>Medical Diagnostics:</strong> Disease prediction, medical
+            image segmentation, diagnostics, and patient outcome
+            predictions.</li>
+          <li><strong>Finance:</strong> Credit risk scoring, fraud detection,
+            investment portfolio management, and stock market prediction.</li>
+          <li><strong>E-commerce & Recommendation Systems:</strong> User
+            behavior modeling, product recommendation, customer segmentation,
+            and churn prediction.</li>
+          <li><strong>Natural Language Processing:</strong> Document
+            classification, sentiment analysis, text categorization, and spam
+            filtering.</li>
+          <li><strong>Environmental Science:</strong> Remote sensing, habitat
+            classification, forest cover monitoring, and predicting
+            environmental risks.</li>
+        </ul>
+
+        <h2>Feature Importance Interpretation 🔍</h2>
+        <p>
+          One of the most valuable aspects of Random Forest is its built-in
+          capability to evaluate the importance of individual features. This
+          allows for meaningful insight into data-driven decisions, facilitating
+          interpretability and supporting strategic decisions in research and
+          industry.
+        </p>
+
+        <h2>Implementation and Tools 🛠️</h2>
+        <p>
+          Random Forest implementations are widely available in machine learning
+          libraries and tools. Some popular libraries include:
+        </p>
+        <ul>
+          <li><a
+              href="https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.RandomForestClassifier.html"
+              target="_blank">Scikit-learn (Python)</a></li>
+          <li><a href="https://cran.r-project.org/web/packages/randomForest/"
+              target="_blank">RandomForest (R)</a></li>
+          <li><a
+              href="https://spark.apache.org/docs/latest/ml-classification-regression.html#random-forests"
+              target="_blank">Apache Spark MLlib</a></li>
+        </ul>
+
+        <h2>Further Learning Resources 📖</h2>
+        <p>
+          To deepen your understanding of Random Forest algorithms, consider
+          exploring these resources:
+        </p>
+        <ul>
+          <li><a href="https://en.wikipedia.org/wiki/Random_forest"
+              target="_blank">Wikipedia: Random Forest</a></li>
+          <li><a
+              href="https://towardsdatascience.com/understanding-random-forest-58381e0602d2"
+              target="_blank">Towards Data Science: Understanding Random
+              Forest</a></li>
+          <li><a
+              href="https://www.datacamp.com/tutorial/random-forests-classifier-python"
+              target="_blank">DataCamp: Random Forest Classifier in
+              Python</a></li>
+          <li><a href="https://www.youtube.com/watch?v=J4Wdy0Wc_xQ"
+              target="_blank">StatQuest: Random Forests Explained</a></li>
+        </ul>
+
+        <h2>Conclusion 🎓</h2>
+        <p>
+          Random Forest continues to be a fundamental algorithm in modern
+          machine learning practice due to its robustness, versatility, and
+          accuracy across various tasks and data types. Understanding its
+          principles, advantages, limitations, and practical applications will
+          equip you to harness its full potential in your projects.
+        </p>
+
+        <p>
+          For a comprehensive historical perspective, we highly recommend
+          reading the original foundational paper by Leo Breiman:
+          <a href="https://www.stat.berkeley.edu/~breiman/randomforest2001.pdf"
+            target="_blank">Random Forests (2001)</a>.
+        </p>
+
+      </div>
+
+      <!-- Rozšírená stránka s návodom -->
+      <div id="tutorial-page" class="page-container">
+        <h1>Tutorial</h1>
+        <p>
+          Welcome to our comprehensive guide on using the Random Forest
+          implementation provided on this platform. Our tool supports both
+          classification and regression tasks, offering flexibility and high
+          performance through a range of customizable hyperparameters. Whether
+          you are new to machine learning or an experienced practitioner, this
+          guide will help you make the most of our service.
+        </p>
+
+        <h2>File Format Requirements</h2>
+        <p>
+          When preparing your data, please ensure that your CSV file meets the
+          following requirements:
+        </p>
+        <ul>
+          <li>
+            <strong>CSV Format:</strong> Your dataset must be a CSV file with
+            comma-separated values.
+          </li>
+          <li>
+            <strong>Data Types:</strong> Include both numerical and categorical
+            features. While our implementation can handle a variety of data
+            types, additional pre-processing might be necessary for optimal
+            performance.
+          </li>
+          <li>
+            <strong>Target Variable Placement:</strong> The target variable
+            should be located in the last column of your CSV file.
+          </li>
+          <li>
+            <strong>Data Quality:</strong> Ensure that your dataset is clean,
+            with minimal missing values and outliers. Consider preprocessing
+            steps such as normalization, encoding of categorical variables, or
+            imputing missing values to improve model accuracy.
+          </li>
+          <li>
+            <strong>Encoding for Classification:</strong> For classification
+            tasks, make sure that class labels are properly encoded (either as
+            numbers or clearly defined strings) to avoid confusion during model
+            training.
+          </li>
+        </ul>
+
+        <h2>Hyperparameters</h2>
+        <p>
+          Fine-tune your Random Forest model by adjusting the following
+          hyperparameters:
+        </p>
+        <ul>
+          <li>
+            <strong>Number of Trees:</strong> Increasing the number of trees
+            generally improves model stability and prediction accuracy, though
+            it will also increase computation time. Experiment with different
+            values to find the optimal balance.
+          </li>
+          <li>
+            <strong>Maximum Depth:</strong> This parameter limits how deep each
+            decision tree can grow. Setting a maximum depth can prevent
+            overfitting by limiting model complexity. Leaving it empty allows
+            trees to expand until they reach pure nodes or a minimum sample
+            split.
+          </li>
+          <li>
+            <strong>Min Samples Split:</strong> Defines the minimum number of
+            samples required to split an internal node. A higher value may
+            reduce model complexity and improve generalization, while a lower
+            value allows the model to capture finer details.
+          </li>
+          <li>
+            <strong>Loss Function:</strong> Choose the appropriate metric for
+            your task. For classification, you can select Gini impurity or
+            Entropy, while for regression, Mean Squared Error (MSE) or Mean
+            Absolute Error (MAE) is recommended.
+          </li>
+        </ul>
+
+        <h2>Model Training Process</h2>
+        <p>
+          During the training phase, our algorithm constructs multiple decision
+          trees using random subsets of data and features. This process, known
+          as bootstrap aggregating (or bagging), helps to reduce variance and
+          enhance the model's ability to generalize. Detailed logs and progress
+          indicators are available to monitor the training process, ensuring
+          transparency and ease of use.
+        </p>
+
+        <h2>Understanding Results</h2>
+        <p>
+          Once the analysis is complete, you will receive several outputs to
+          help you evaluate and interpret your model's performance:
+        </p>
+        <ul>
+          <li>
+            <strong>Predictions:</strong> The output predictions show the
+            model’s decision for each entry in your dataset, whether it be class
+            labels for classification or numerical values for regression.
+          </li>
+          <li>
+            <strong>Metrics:</strong> Performance metrics are provided to
+            evaluate model accuracy and reliability. For classification tasks,
+            expect metrics such as accuracy, precision, recall, and F1-score.
+            For regression, the tool provides RMSE, MAE, and R-squared values.
+          </li>
+          <li>
+            <strong>Visualizations:</strong> Charts and plots such as feature
+            importance graphs, confusion matrices, and residual plots help you
+            visually assess model performance and gain insights into data
+            patterns.
+          </li>
+          <li>
+            <strong>Summary Statistics:</strong> Detailed statistical summaries
+            offer an overview of your dataset, including data distributions,
+            correlations, and key performance indicators.
+          </li>
+        </ul>
+
+        <h2>Frequently Asked Questions</h2>
+        <p>
+          Here are some common questions and answers regarding our Random Forest
+          implementation:
+        </p>
+        <ul>
+          <li>
+            <strong>Q:</strong> How do I determine the optimal number of
+            trees?<br>
+            <strong>A:</strong> Start with a moderate number (e.g., 100 trees)
+            and incrementally increase the number while monitoring improvements
+            in performance. Diminishing returns may indicate the optimal range.
+          </li>
+          <li>
+            <strong>Q:</strong> What steps should I take if my model is
+            overfitting?<br>
+            <strong>A:</strong> Consider reducing the maximum depth of the
+            trees, increasing the minimum samples split, or using
+            cross-validation to ensure the model generalizes well on unseen
+            data.
+          </li>
+          <li>
+            <strong>Q:</strong> Is this tool suitable for time-series data?<br>
+            <strong>A:</strong> While primarily designed for tabular data, you
+            can preprocess time-series data to extract relevant features.
+            However, for specific time-series tasks, dedicated models may yield
+            better results.
+          </li>
+          <li>
+            <strong>Q:</strong> Are there any limitations regarding dataset
+            size?<br>
+            <strong>A:</strong> There is no strict limit, but very large
+            datasets may require additional computational resources. Consider
+            sampling or distributed processing for extremely large datasets.
+          </li>
+        </ul>
+
+        <h2>Conclusion</h2>
+        <p>
+          This guide provides an in-depth overview of the Random Forest
+          implementation available on our platform. By following these
+          guidelines, you can effectively tailor your model to address both
+          classification and regression challenges. For further details, refer
+          to our full documentation or contact our support team.
+        </p>
+
+        <h2>Additional Resources</h2>
+        <p>
+          To expand your knowledge and improve your data science skills, explore
+          the following resources:
+        </p>
+        <ul>
+          <li>
+            In-depth documentation on decision trees and ensemble learning
+            methods.
+          </li>
+          <li>
+            Articles and tutorials on hyperparameter tuning and model evaluation
+            techniques.
+          </li>
+          <li>
+            Community forums and discussion boards for tips, best practices, and
+            troubleshooting advice.
+          </li>
+        </ul>
+
+        <p>
+          We hope this extended tutorial enriches your experience and empowers
+          you to achieve optimal results with our Random Forest service. Happy
+          modeling and data exploration!
+        </p>
+      </div>
+
+      <!-- Rozšírená stránka s informáciami -->
+      <div id="info-page" class="page-container">
+        <h1>Data Information and Model Details</h1>
+        <p>
+          Our Random Forest model is robust and versatile, capable of handling
+          both categorical and quantitative data types effectively. Proper data
+          preparation is key to maximizing predictive accuracy and reliability.
+          Here are detailed guidelines to help you achieve optimal results:
+        </p>
+
+        <ul>
+          <li>
+            <strong>Categorical Data:</strong>
+            Categorical features are automatically preprocessed by our model,
+            typically using methods such as label encoding or one-hot encoding.
+            Label encoding assigns each category a unique integer, while one-hot
+            encoding creates binary columns for each category. The choice of
+            encoding significantly impacts model performance, especially with
+            high-cardinality features. Consider manually preprocessing
+            categories when specific domain knowledge can enhance results.
+          </li>
+
+          <li>
+            <strong>Quantitative Data:</strong>
+            Quantitative (numerical) features often require scaling to ensure
+            optimal model performance. Common scaling techniques include
+            StandardScaler (z-score normalization) or Min-Max scaling. Scaling
+            helps prevent features with larger magnitudes from dominating the
+            learning process, improving model stability and predictive accuracy.
+          </li>
+
+          <li>
+            <strong>Number of Attributes (Feature Selection):</strong>
+            Using too many features can lead to overfitting, where the model
+            performs excellently on training data but poorly on new data.
+            Feature selection methods such as recursive feature elimination,
+            mutual information, or variance thresholding can help identify and
+            remove redundant or irrelevant features, thus enhancing model
+            generalization.
+          </li>
+
+          <li>
+            <strong>Potential Values and Data Quality:</strong>
+            Data consistency is essential. Outliers, missing values,
+            inconsistent formatting, or incorrect data types can severely
+            degrade model performance. We recommend thorough preprocessing,
+            including:
+            <ul>
+              <li>Removing or imputing missing values using mean, median, mode,
+                or advanced methods like KNN or predictive imputation.</li>
+              <li>Detecting and handling outliers through methods like IQR or
+                z-score analysis.</li>
+              <li>Ensuring consistent data types across the dataset to prevent
+                training errors or inaccuracies.</li>
+            </ul>
+          </li>
+
+          <li>
+            <strong>Hyperparameter Tuning:</strong>
+            Hyperparameters such as the number of trees (n_trees), maximum depth
+            (max_depth), minimum samples required for a node split
+            (min_samples_split), and loss function are critical for tuning model
+            performance:
+            <ul>
+              <li><strong>Number of Trees (n_trees):</strong> Increasing the
+                number of trees reduces variance and increases prediction
+                stability, though it also raises computational costs.</li>
+              <li><strong>Maximum Depth (max_depth):</strong> Limiting the depth
+                of trees prevents overfitting and controls complexity.</li>
+              <li><strong>Min Samples Split (min_samples_split):</strong>
+                Increasing this parameter reduces model sensitivity to noise,
+                ensuring more generalizable results.</li>
+              <li><strong>Loss Function:</strong> Selecting appropriate metrics
+                such as Gini or Entropy (classification) or MSE/MAE (regression)
+                significantly impacts model accuracy and performance.</li>
+            </ul>
+          </li>
+        </ul>
+
+        <h2>How the Random Forest Model Works</h2>
+        <p>
+          A Random Forest is an ensemble model composed of multiple decision
+          trees, each trained on random subsets of data and features.
+          Predictions are made by aggregating outputs from individual
+          trees—majority voting for classification or averaging for
+          regression—resulting in robust and accurate predictions. Its ability
+          to handle nonlinear relationships and complex interactions among
+          features makes it highly effective across diverse datasets.
+        </p>
+
+        <h2>Interpretability and Feature Importance</h2>
+        <p>
+          Random Forest models provide built-in interpretability through feature
+          importance scores. These scores indicate how much each feature
+          contributes to the final prediction. Analyzing feature importance
+          helps identify key predictors, facilitating better data-driven
+          decisions and insightful interpretations.
+        </p>
+
+        <h2>Best Practices for Data Preparation</h2>
+        <p>
+          Follow these guidelines to enhance model performance:
+        </p>
+        <ul>
+          <li>Always conduct exploratory data analysis (EDA) to understand
+            feature distributions, relationships, and anomalies.</li>
+          <li>Balance categorical features by merging categories with low
+            frequency.</li>
+          <li>Test multiple encoding methods and scaling strategies to determine
+            the best preprocessing pipeline.</li>
+          <li>Split data into training, validation, and testing sets to assess
+            model performance reliably and prevent data leakage.</li>
+        </ul>
+
+        <h2>Model Limitations and Considerations</h2>
+        <p>
+          While highly effective, Random Forest models have some limitations:
+        </p>
+        <ul>
+          <li>Computational intensity can increase significantly with larger
+            datasets or high numbers of trees.</li>
+          <li>Less interpretable compared to individual decision trees due to
+            ensemble complexity, although feature importance aids
+            interpretability.</li>
+          <li>Performance can degrade if data contains a large proportion of
+            irrelevant or highly correlated features.</li>
+        </ul>
+
+        <h2>Additional Recommendations</h2>
+        <p>
+          Regularly monitor and validate model performance. Periodic retraining
+          with new data and recalibrating hyperparameters will ensure sustained
+          accuracy over time. Leverage automated hyperparameter tuning methods
+          (e.g., Grid Search, Randomized Search) for optimal results.
+        </p>
+
+        <p>
+          Our Random Forest implementation is versatile and powerful when used
+          correctly. With careful data preparation and thoughtful hyperparameter
+          tuning, you'll be equipped to achieve outstanding predictive
+          performance.
+        </p>
+
+        <div class="forest-container">
+          <div class="tree"></div>
+          <div class="tree"></div>
+          <div class="tree"></div>
+          <div class="tree"></div>
+          <div class="tree"></div>
+          <div class="tree"></div>
+        </div>
+      </div>
+
+      <!-- Kontaktná stránka -->
+      <div id="contact-page" class="page-container">
+        <h1>Contact</h1>
+        <p>If you have questions or need assistance with the Random Forest
+          service, please reach out to:</p>
+        <p>Email: <a
+            href="mailto:sofiia.fomenko@student.tuke.sk">sofiia.fomenko@student.tuke.sk</a></p>
+        <p>GitHub: <a href="https://github.com/sofiiafomenko/random_forest_ml"
+            target="_blank">https://github.com/sofiiafomenko/random_forest_ml</a></p>
+
+      </div>
+    </div>
+
+    <footer>
+      <p>Created by Sofiia Fomenko</p>
+    </footer>
+
+    <script>
+    // Funkcionalita navigácie
+    document.querySelectorAll('.nav-link, .logo').forEach(item => {
+      item.addEventListener('click', function(e) {
+        e.preventDefault();
+        
+        // Získanie stránky, ktorá sa má zobraziť
+        const pageId = this.getAttribute('data-page');
+        
+        // Odstránenie aktívnej triedy zo všetkých odkazov
+        document.querySelectorAll('.nav-link').forEach(link => {
+          link.classList.remove('active');
+        });
+        
+        // Pridanie aktívnej triedy na kliknutý odkaz
+        if (this.classList.contains('nav-link')) {
+          this.classList.add('active');
+        } else {
+          // Ak bolo kliknuté na logo, aktivovať domovský odkaz
+          document.querySelector('.nav-link[data-page="home"]').classList.add('active');
+        }
+        
+        // Skrytie všetkých stránok
+        document.querySelectorAll('.page-container').forEach(page => {
+          page.classList.remove('active');
+        });
+        
+        // Zobrazenie vybranej stránky
+        document.getElementById(`${pageId}-page`).classList.add('active');
+        
+        // Aktualizácia hash v URL
+        window.location.hash = pageId;
+      });
+    });
+    
+    // Spracovanie hash v URL pri načítaní stránky
+    window.addEventListener('load', function() {
+      const hash = window.location.hash.substring(1);
+      if (hash) {
+        const pageIds = ['home', 'about', 'Tutorial', 'info', 'contact'];
+        if (pageIds.includes(hash)) {
+          // Najskôr skryť všetky stránky
+          document.querySelectorAll('.page-container').forEach(page => {
+            page.classList.remove('active');
+          });
+          
+          // Zobrazenie stránky, ktorá zodpovedá hash
+          document.getElementById(`${hash}-page`).classList.add('active');
+          
+          // Aktualizácia aktívneho odkazu
+          document.querySelectorAll('.nav-link').forEach(link => {
+            link.classList.remove('active');
+          });
+          document.querySelector(`.nav-link[data-page="${hash}"]`).classList.add('active');
+        }
+      }
+    });
+
+    // Objekt s možnosťami funkcie straty
+    const lossOptions = {
+      classification: [
+        { value: 'gini', label: 'gini', explanation: 'Používa Giniho index na vyhodnotenie nečistoty.' },
+        { value: 'entropy', label: 'entropy', explanation: 'Používa entropiu na výpočet informačného zisku.' }
+      ],
+      regression: [
+        { value: 'mse', label: 'mse', explanation: 'Stredná kvadratická chyba: citlivá na veľké chyby.' },
+        { value: 'mae', label: 'mae', explanation: 'Stredná absolútna chyba: menej citlivá na odľahlé hodnoty.' }
+      ]
+    };
+  
+    // Funkcia na aktualizáciu možností funkcie straty na základe vybranej úlohy
+    function updateLossOptions() {
+      let task;
+      const taskRadios = document.querySelectorAll('input[name="task"]');
+      taskRadios.forEach(radio => {
+        if (radio.checked) {
+          task = radio.value;
+        }
+      });
+      const lossSelect = document.getElementById('loss');
+      lossSelect.innerHTML = ''; // vyčistenie možností
+  
+      const options = lossOptions[task];
+      options.forEach((opt, index) => {
+        const optionElem = document.createElement('option');
+        optionElem.value = opt.value;
+        optionElem.innerText = opt.label;
+        if (index === 0) {
+          optionElem.selected = true;
+          updateLossHelp(opt.explanation);
+        }
+        lossSelect.appendChild(optionElem);
+      });
+    }
+  
+    // Funkcia na aktualizáciu nápovedy (atribút title) vedľa výberu funkcie straty
+    function updateLossHelp(explanation) {
+      document.getElementById('loss-help').title = explanation;
+    }
+  
+    document.getElementById("file").addEventListener("change", function() {
+      let fileName = this.files.length > 0 ? this.files[0].name : "Žiadny súbor nebol vybraný";
+      document.querySelector(".file-name").textContent = fileName;
+    });
+  
+    // Aktualizácia nápovedy pri zmene funkcie straty
+    document.getElementById('loss').addEventListener('change', function() {
+      let task;
+      const taskRadios = document.querySelectorAll('input[name="task"]');
+      taskRadios.forEach(radio => {
+        if (radio.checked) {
+          task = radio.value;
+        }
+      });
+      const selectedValue = this.value;
+      const opts = lossOptions[task];
+      const selectedOpt = opts.find(opt => opt.value === selectedValue);
+      if (selectedOpt) {
+        updateLossHelp(selectedOpt.explanation);
+      }
+    });
+  
+    // Aktualizácia možností funkcie straty pri zmene typu úlohy
+    document.querySelectorAll('input[name="task"]').forEach(radio => {
+      radio.addEventListener('change', updateLossOptions);
+    });
+  
+    // Pri kliknutí na ikonu nápovedy zobraziť vyskakovacie okno s vysvetlením
+    document.getElementById('loss-help').addEventListener('click', function() {
+      alert(this.title);
+    });
+  
+    // Hladké posúvanie pre odkazy na kotvy
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        // Navigácia na stránke je spracovaná samostatne, takže tu spracovávame
+        // iba posúvanie v rámci kotiev na stránke
+        if (this.getAttribute('data-page')) {
+          return; // Nechať navigáciu na stránke spracovať túto akciu
+        }
+        
+        e.preventDefault();
+        const targetId = this.getAttribute('href');
+        if (targetId === '#') return;
+        
+        const targetElement = document.querySelector(targetId);
+        if (targetElement) {
+          targetElement.scrollIntoView({
+            behavior: 'smooth',
+            block: 'start'
+          });
+        }
+      });
+    });
+
+    // Inicializácia pri načítaní stránky
+    document.addEventListener('DOMContentLoaded', updateLossOptions);
+</script>
+  </body>
+</html>

@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="../static/css/style.css">
+    <title>Prediction Results</title>
+</head>
+<body>
+    <div class="container">
+      <a href="/" class="styled-button" title="Go back">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <polyline points="15 18 9 12 15 6" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </a>
+      <h1 class="animated-title">Prediction Results ({{ task }})</h1>
+      <p>Dataset: {{ dataset_name }}</p>
+      <p>{{ dataset_info }}</p>
+
+      
+      {% if result_assessment %}
+        <h2>Result Assessment:</h2>
+        <p class="assessment">{{ result_assessment }}</p>
+      {% endif %}
+      
+      {% if metrics %}
+  <h2>Metrics:</h2>
+  <ul class="metrics-list">
+    {% for key, value in metrics.items() %}
+      <li>
+        {{ key }}: {{ value|round(4) }}
+      </li>
+      <p>
+        {% if metric_explanations and key in metric_explanations %}
+      </p>
+          <br>
+          </strong> {{ metric_explanations[key] }}</small>
+        {% endif %}
+     
+    {% endfor %}
+  </ul>
+{% endif %}
+      
+      {% if summary_table %}
+        <h2>Summary Statistics:</h2>
+        <div class="results-section">{{ summary_table | safe }}</div>
+        {% if summary_explanation %}
+          <p class="explanation">{{ summary_explanation }}</p>
+        {% endif %}
+      {% endif %}
+      
+      {% if visualizations %}
+        <h2>Visualizations:</h2>
+        <div class="vis-container">
+          {% for i in range(visualizations|length) %}
+            <div class="vis-item">
+              <img src="data:image/png;base64,{{ visualizations[i] }}" alt="Visualization {{ i+1 }}">
+              <p class="explanation">{{ vis_explanations[i] }}</p>
+            </div>
+          {% endfor %}
+        </div>
+      {% endif %}
+      
+      <h2>Predictions Table:</h2>
+      <div class="predictions-section">{{ predictions_table | safe }}</div>
+      {% if predictions_explanation %}
+        <p class="explanation">{{ predictions_explanation }}</p>
+      {% endif %}
+      
+      <h2>Dataset Head:</h2>
+      <div class="head-section">{{ head_table | safe }}</div>
+      {% if head_explanation %}
+        <p class="explanation">{{ head_explanation }}</p>
+      {% endif %}
+
+      
+      
+      <br>
+      <a href="/" class="styled-button" title="Go back">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <polyline points="15 18 9 12 15 6" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </a>
+    </div>
+    <footer>
+        <p>Created by Sofiia Fomenko</p>
+    </footer>
+
+
+  
+
+</body>
+</html>
